@@ -1,6 +1,7 @@
-import { auth } from '@/auth';
+import { auth, signOut } from '@/auth';
 import { cn } from '@/lib/utils';
 import NavLink from './nav-link';
+import { Button } from './ui/button';
 
 export default async function Header() {
   const session = await auth();
@@ -12,7 +13,25 @@ export default async function Header() {
           <NavLink href="/" name="Home" />
           {session ? (
             <>
-              <NavLink href="/dashboard" name="Dashboard" />
+              <NavLink
+                href="/dashboard"
+                name="Dashboard"
+                matchPattern="dashboard"
+              />
+              <form
+                action={async () => {
+                  'use server';
+                  await signOut();
+                }}
+              >
+                <Button
+                  type="submit"
+                  variant="ghost"
+                  className="text-brand-secondary hover:bg-gray-100"
+                >
+                  Logout
+                </Button>
+              </form>
             </>
           ) : (
             <NavLink href="/login" name="Login" />

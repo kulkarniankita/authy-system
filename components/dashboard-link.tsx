@@ -4,26 +4,22 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function NavLink({
+export default function DashboardLink({
   href,
   name,
-  matchPattern,
 }: {
   href: string;
   name: string;
-  matchPattern?: string;
 }) {
   const pathname = usePathname();
-  const isActive = matchPattern
-    ? pathname.includes(matchPattern)
-    : pathname === href;
+  const isActive = pathname === href;
   return (
     <Link
       href={href}
       className={cn(
         isActive
-          ? 'bg-brand-primary text-gray-900 hover:bg-brand-primary/90 rounded-md px-2 py-1'
-          : 'text-brand-secondary hover:bg-gray-100 rounded-md px-2 py-1'
+          ? 'bg-brand-accent text-brand-secondary font-medium px-3 py-2 rounded-md w-full'
+          : 'text-brand-secondary/70 hover:bg-gray-100 px-3 py-2 rounded-md w-full'
       )}
     >
       {name}
