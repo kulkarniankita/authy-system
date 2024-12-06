@@ -1,22 +1,22 @@
-import { signIn } from '@/auth';
+'use client';
+import { signIn } from 'next-auth/react';
 
 export function LoginForm() {
+  const credentialsAction = (formData: FormData) => {
+    signIn('credentials', formData);
+  };
+
   return (
-    <form
-      action={async (formData) => {
-        'use server';
-        await signIn('credentials', formData);
-      }}
-    >
-      <label>
+    <form action={credentialsAction}>
+      <label htmlFor="credentials-username">
         Username
-        <input name="username" type="text" />
+        <input type="text" id="credentials-username" name="username" />
       </label>
-      <label>
+      <label htmlFor="credentials-password">
         Password
-        <input name="password" type="password" />
+        <input type="password" id="credentials-password" name="password" />
       </label>
-      <button>Sign In</button>
+      <input type="submit" value="Sign In" />
     </form>
   );
 }
