@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
+import NavLink from './nav-link';
 
 export default async function Header() {
   const session = await auth();
@@ -9,13 +9,13 @@ export default async function Header() {
     <div className="bg-white p-4 border-b border-gray-200 dark:border-gray-800 w-full">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex gap-4">
-          <Link href="/">Home</Link>
+          <NavLink href="/" name="Home" />
           {session ? (
             <>
-              <Link href="/dashboard">Dashboard</Link>
+              <NavLink href="/dashboard" name="Dashboard" />
             </>
           ) : (
-            <Link href="/login">Login</Link>
+            <NavLink href="/login" name="Login" />
           )}
         </div>
         <div className="flex items-center gap-2">
