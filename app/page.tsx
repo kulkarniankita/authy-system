@@ -1,6 +1,9 @@
 import AuthPanel from '@/components/auth-panel';
 
+import { auth } from '@/auth';
+
 export default async function Home() {
+  const session = await auth();
   return (
     <div className="min-h-screen">
       <div className="overflow-hidden mx-auto w-full max-w-7xl">
@@ -15,7 +18,7 @@ export default async function Home() {
             </p>
           </div>
         </div>
-        <AuthPanel />
+        <AuthPanel session={session} />
       </div>
     </div>
   );
