@@ -12,7 +12,11 @@ export default async function Header() {
           <NavLink href="/" name="Home" />
           {session ? (
             <>
-              <NavLink href="/dashboard" name="Dashboard" />
+              <NavLink
+                href="/dashboard"
+                name="Dashboard"
+                matchPattern="/dashboard"
+              />
             </>
           ) : (
             <NavLink href="/login" name="Login" />
