@@ -1,21 +1,21 @@
-'use client';
-import { signIn } from 'next-auth/react';
-import { useState } from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
+"use client";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 export function LoginForm() {
   const [error, setError] = useState<string | null>(null);
   const credentialsAction = async (formData: FormData) => {
-    const result = await signIn('credentials', {
-      username: formData.get('username'),
-      password: formData.get('password'),
+    const result = await signIn("credentials", {
+      username: formData.get("username"),
+      password: formData.get("password"),
       redirect: true,
-      callbackUrl: '/',
+      callbackUrl: "/",
     });
 
     if (result?.error) {
-      setError('Invalid credentials');
+      setError("Invalid credentials");
     }
   };
 
@@ -32,7 +32,7 @@ export function LoginForm() {
           required
           className="w-full p-2 rounded-md border border-gray-200 
         focus:border-brand-secondary focus:ring-2 focus:ring-brand-secondary/20 
-        outline-none transition-all bg-gray-50"
+        outline-hidden transition-all bg-gray-50"
           placeholder="Username"
         />
         <label htmlFor="password" className="sr-only">
@@ -45,17 +45,18 @@ export function LoginForm() {
           required
           className="w-full p-2 rounded-md border border-gray-200 
                      focus:border-brand-secondary focus:ring-2 focus:ring-brand-secondary/20 
-                     outline-none transition-all bg-gray-50"
+                     outline-hidden transition-all bg-gray-50"
           placeholder="Password"
         />
+
+        {error && <p>{error}</p>}
+        <Button
+          type="submit"
+          className="w-full bg-brand-primary text-gray-900 hover:bg-brand-primary/90"
+        >
+          Sign In
+        </Button>
       </div>
-      {error && <p>{error}</p>}
-      <Button
-        type="submit"
-        className="w-full bg-brand-primary text-gray-900 hover:bg-brand-primary/90"
-      >
-        Sign In
-      </Button>
     </form>
   );
 }
